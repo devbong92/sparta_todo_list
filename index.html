@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 투두 리스트</title>
+</head>
+<script type="module">
+
+    const input = document.querySelector("#todo-input");
+    const button = document.querySelector("#add-todo");
+    const ul = document.querySelector("#todo-list");
+
+
+    button.addEventListener("click", () => {
+
+        if (input.value === '') {
+            alert("할 일을 입력하세요.");
+            return 0;
+        }
+
+        const li = document.createElement('li');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        li.appendChild(checkbox);
+
+        const span = document.createElement('span');
+        span.textContent = input.value;
+        li.appendChild(span);
+
+        const del = document.createElement('button');
+        del.textContent = "삭제";
+        li.appendChild(del);
+
+        ul.appendChild(li);
+        input.value = "";
+
+
+        del.addEventListener('click', (event) => {
+            ul.removeChild(event.currentTarget.parentNode)
+        })
+
+
+    });
+
+    input.addEventListener('keypress', (event) => {
+        
+        if (event.keyCode === 13)
+            button.click();
+    })
+
+</script>
+<style>
+    .todo-container {
+        width: 400px;
+        margin: 20px auto 20px auto;
+        text-align: center;
+        border-color: gray;
+
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 10px;
+    }
+
+    li {
+        display: block;
+        margin: 20px;
+        list-style: none;
+        border-bottom: 1px solid;
+        text-align: left;
+    }
+</style>
+
+<body>
+    <div class="todo-container">
+        <h1>두투 리스트</h1>
+        <input type="text" id="todo-input" placeholder="할 일을 입력하세요">
+        <button id="add-todo">추가</button>
+        <ul id="todo-list">
+            <li>
+                <input type="checkbox">
+                <span>밥 먹고 가볍게 산책하기</span>
+                <button>삭제</button>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
